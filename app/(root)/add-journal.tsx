@@ -1,6 +1,7 @@
 import MoodSelector from '@/components/MoodSelector';
 import ScreenTitleHeader from '@/components/ScreenTitleHeader';
 import { moods } from '@/constants';
+import { useUser } from '@clerk/clerk-expo';
 import { useState } from 'react';
 import {
   Image,
@@ -15,11 +16,13 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AddJournal = () => {
+  const { user } = useUser()
   const [mood, setMood] = useState('Happy');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [showTitleError, setShowTitleError] = useState(false);
   const [showDescriptionError, setShowDescriptionError] = useState(false);
+  const userEmail = user?.emailAddresses[0].emailAddress
 
   const today = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -55,7 +58,13 @@ const AddJournal = () => {
     }
 
     // Save the journal entry
-    console.log('Journal Entry:', { title, mood, description, date: new Date() });
+    console.log('Journal Entry:', {
+      title,
+      mood,
+      description,
+      date: new Date(),
+      email: userEmail
+    });
   };
 
   return (
