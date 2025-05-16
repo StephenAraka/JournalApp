@@ -6,9 +6,8 @@ import "react-native-reanimated";
 
 import "../global.css";
 
-// import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
-// import { Slot } from "expo-router";
-// import { tokenCache } from "@/lib/auth";
+import { tokenCache } from "@/lib/auth/cache";
+import { ClerkLoaded, ClerkProvider } from "@clerk/clerk-expo";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
@@ -27,11 +26,11 @@ export default function RootLayout() {
     "RibeyeMarrow": require("../assets/fonts/RibeyeMarrow-Regular.ttf"),
   });
 
-  // if (!publishableKey) {
-  //   throw new Error(
-  //     "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env",
-  //   );
-  // }
+  if (!publishableKey) {
+    throw new Error(
+      "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env",
+    );
+  }
 
   useEffect(() => {
     if (loaded) {
@@ -44,15 +43,15 @@ export default function RootLayout() {
   }
 
   return (
-    // <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-    //   <ClerkLoaded>
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <ClerkLoaded>
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(root)" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
-    //   {/* </ClerkLoaded>
-    // </ClerkProvider> */}
+      </ClerkLoaded>
+    </ClerkProvider>
   );
 }

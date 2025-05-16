@@ -1,9 +1,8 @@
-// import { useAuth } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/clerk-expo";
 import { Redirect } from "expo-router";
 
 const Home = () => {
-  let isSignedIn = true;
-  // const { isSignedIn } = useAuth();
+  const { isSignedIn } = useAuth();
 
   if (isSignedIn) {
     return <Redirect href="/(root)/(tabs)/home" />;
