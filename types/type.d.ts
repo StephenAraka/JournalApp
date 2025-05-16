@@ -35,3 +35,8 @@ declare interface Journal {
   createdAt: string;
   owner: string;
 }
+
+declare type MoodBotProps = {
+  description: string;
+  mood: string;
+};
