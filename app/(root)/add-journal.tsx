@@ -1,7 +1,10 @@
 import MoodSelector from '@/components/MoodSelector';
 import ScreenTitleHeader from '@/components/ScreenTitleHeader';
-import { moods } from '@/constants';
+import { api } from '@/convex/_generated/api';
+import { getCoverImage } from '@/lib/utils/helpers';
 import { useUser } from '@clerk/clerk-expo';
+import { useMutation } from 'convex/react';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import {
   Image,
@@ -30,24 +33,11 @@ const AddJournal = () => {
     day: 'numeric',
   });
 
-  const getCoverImage = (mood: string) => {
-    switch (mood) {
-      case 'Happy':
-        return moods[0];
-      case 'Sad':
-        return moods[1];
-      case 'Calm':
-        return moods[3];
-      case 'Anxious':
-        return moods[2];
-      default:
-        return moods[0];
-    }
-  };
-
   const MAXCHARS = 500;
 
-  const handleSubmit = () => {
+  const submitJournal = useMutation(api.journals.submit);
+
+  const handleSubmit = async () => {
     if (!title.trim()) {
       setShowTitleError(true);
       return;
@@ -57,15 +47,23 @@ const AddJournal = () => {
       return;
     }
 
-    // Save the journal entry
-    // TODO - Submit to the backend
-    console.log('Journal Entry:', {
-      title,
-      mood,
-      description,
-      date: new Date(),
-      email: userEmail
-    });
+    // Save the journal entry to the database
+    try {
+      await submitJournal({
+        title,
+        mood,
+        description,
+        date: new Date().toISOString(),
+        owner: userEmail!,
+      });
+      router.push('/(root)/(tabs)/journals');
+      
+      setTitle('');
+      setDescription('');
+      setMood('Happy');
+    } catch (error) {
+      console.error("Failed to submit journal", error);
+    }
   };
 
   return (
