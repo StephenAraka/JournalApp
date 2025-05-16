@@ -26,3 +26,12 @@ declare interface ScreenHeaderProps {
   showCloseButton?: boolean;
   closeButtonAction?: () => void;
 }
+
+declare interface Journal {
+  id: string;
+  title: string;
+  mood: string;
+  description: string;
+  createdAt: string;
+  owner: string;
+}
