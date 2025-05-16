@@ -11,7 +11,7 @@ const Profile = () => {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const userEmail = user?.emailAddresses[0].emailAddress || '';
 
-  // Log Out using clerk's `signOut()` function
+  // - Log Out using clerk's `signOut()` function
   const { signOut } = useClerk()
   const logOutUser = async () => {
     try {
@@ -26,10 +26,10 @@ const Profile = () => {
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView className="pt-4 px-4">
 
-        {/* Header */}
+        {/* //- Header */}
         <ScreenTitleHeader showCloseButton={false} title="Profile" />
 
-        {/* Profile Section */}
+        {/* // - Profile Section */}
         {userEmail && (
           <View className="mb-6">
             <Text className="text-sm text-gray-500 mb-2">Profile</Text>
@@ -40,7 +40,7 @@ const Profile = () => {
           </View>
         )}
 
-        {/* Email Notification Toggle */}
+        {/* //- Email Notification Toggle */}
         <View className="mb-6">
           <Text className="text-sm text-gray-500 mb-2">Notifications</Text>
           <View className="flex-row justify-between items-center bg-white py-4 px-4 border-b border-gray-100">
@@ -54,7 +54,7 @@ const Profile = () => {
           </View>
         </View>
 
-        {/* Reset Password Link */}
+        {/* //- Reset Password Link */}
         {userEmail && (
           <View className="mb-6">
             <Text className="text-sm text-gray-500 mb-2">Security</Text>
@@ -69,7 +69,7 @@ const Profile = () => {
           </View>
         )}
 
-        {/* About Section */}
+        {/*//- About Section */}
         <View className="mb-10">
           <Text className="text-sm text-gray-500 mb-2">About App</Text>
           <View className="bg-white py-4 px-4 border-b border-gray-100">
@@ -79,7 +79,7 @@ const Profile = () => {
           </View>
         </View>
 
-        {/* Logout Button */}
+        {/*//- Logout Button */}
         <TouchableOpacity onPress={logOutUser} className="bg-general-50 py-3 rounded-md mb-10 mx-4">
           <Text className="text-center text-white font-semibold text-base">Logout</Text>
         </TouchableOpacity>

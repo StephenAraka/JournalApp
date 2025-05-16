@@ -2,14 +2,10 @@ import CustomButton from "@/components/CustomButton";
 import { moods } from "@/constants";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
-import { ImageBackground, Linking, Text, View } from "react-native";
+import { ImageBackground, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Welcome = () => {
-  const openLink = (url: string) => {
-    Linking.openURL(url);
-  };
-
   return (
     <ImageBackground
       source={moods[0]}

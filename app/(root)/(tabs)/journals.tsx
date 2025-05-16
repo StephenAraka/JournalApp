@@ -1,7 +1,7 @@
 import ScreenTitleHeader from '@/components/ScreenTitleHeader';
 import { images } from '@/constants';
 import { api } from '@/convex/_generated/api';
-import { getCoverImage } from '@/lib/utils/helpers';
+import { formatReadableDate, getCoverImage } from '@/lib/utils/helpers';
 import { Journal } from '@/types/type';
 import { useUser } from '@clerk/clerk-expo';
 import { useQuery } from 'convex/react';
@@ -32,7 +32,7 @@ const Journals = () => {
       <Image source={getCoverImage(item.mood)} className="w-16 h-16 rounded-md mr-4" resizeMode="cover" />
       <View className="flex-1">
         <Text className="text-base font-semibold text-gray-800">{item.title}</Text>
-        <Text className="text-sm text-gray-500">{item.createdAt}</Text>
+        <Text className="text-sm text-gray-500">{formatReadableDate(item.createdAt)}</Text>
       </View>
     </TouchableOpacity>
   );

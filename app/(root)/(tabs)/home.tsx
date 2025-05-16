@@ -17,10 +17,8 @@ const Home = () => {
         source={moods[0]} 
         className="w-full h-full rounded-lg overflow-hidden"
       >
-        {/* White overlay with opacity */}
         <View className="absolute inset-0 bg-white opacity-70" />
         
-        {/* Text content centered */}
         <View className="w-full h-full justify-center items-center p-6">
           <Text className="text-6xl text-gray-800 mb-3 text-center font-RibeyeMarrow">
             NashPad Journal

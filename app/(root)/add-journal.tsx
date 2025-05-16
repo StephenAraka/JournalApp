@@ -47,7 +47,7 @@ const AddJournal = () => {
       return;
     }
 
-    // Save the journal entry to the database
+    // - Save the journal entry to the database
     try {
       await submitJournal({
         title,
