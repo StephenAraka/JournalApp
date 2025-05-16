@@ -5,8 +5,7 @@ import LottieView from 'lottie-react-native';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-// const GOOGLE_AI_API_KEY = process.env.GOOGLE_AI_API_KEY;
-const GOOGLE_AI_API_KEY = 'AIzaSyBT-P6MZ1hmRryl-a8prXIgSs7TAI9x8WE';
+const GOOGLE_AI_API_KEY = process.env.GOOGLE_AI_API_KEY;
 
 const MoodJournalBot = ({
   mood,
