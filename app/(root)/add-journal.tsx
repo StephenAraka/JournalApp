@@ -55,7 +55,7 @@ const AddJournal = () => {
     }
 
     // Save the journal entry
-    console.log('Journal Entry:', { mood, description });
+    console.log('Journal Entry:', { title, mood, description, date: new Date() });
   };
 
   return (
@@ -66,13 +66,13 @@ const AddJournal = () => {
         keyboardVerticalOffset={100}
       >
         <ScrollView
-      className="flex-1"
-      contentContainerStyle={{ paddingBottom: 100 }}
-      keyboardShouldPersistTaps="handled"
-    >
+          className="flex-1"
+          contentContainerStyle={{ paddingBottom: 100 }}
+          keyboardShouldPersistTaps="handled"
+        >
           <ScreenTitleHeader title="Today's Journal" />
 
-          {/* Date */}
+          {/* // - Date */}
           <View className="flex-row items-center justify-center">
             <View className="rounded-md px-4 py-3 bg-secondary-200">
               <Text className="text-base text-gray-800 text-center">{today}</Text>
@@ -80,7 +80,7 @@ const AddJournal = () => {
           </View>
 
           <View className="px-4 pt-4">
-            {/* Mood Image */}
+            {/* // - Mood Image */}
             <View className="bg-gray-100 rounded-xl h-48 mb-6 overflow-hidden">
               <Image
                 source={getCoverImage(mood)}
@@ -89,7 +89,7 @@ const AddJournal = () => {
               />
             </View>
 
-            {/* Title */}
+            {/* // - Journal Title */}
             <View className='mb-4'>
               <Text className="text-sm font-semibold text-gray-700 mb-1">Title</Text>
               <TextInput
@@ -106,14 +106,14 @@ const AddJournal = () => {
               {showTitleError && <Text className="ml-2 text-sm text-red-500 mb-1">Please enter a title</Text>}
             </View>
 
-            {/* Mood Selector */}
+            {/* // -  Journal Mood Selector */}
             <MoodSelector
               label="How are you feeling today?"
               selectedValue={mood}
               onValueChange={(value) => setMood(value)}
             />
 
-            {/* Description */}
+            {/* // - Journal Description */}
             <Text className="text-sm font-semibold text-gray-700 mb-1 mt-4">Description</Text>
             <View className="relative">
               <TextInput
@@ -137,12 +137,11 @@ const AddJournal = () => {
           </View>
         </ScrollView>
 
-{/* Save Button */}
-      <TouchableOpacity className="bg-general-50 p-4 rounded-lg mx-4 mb-8" onPress={handleSubmit}>
-        <Text className="text-white text-center text-base font-semibold">
-          Save Journal
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity className="bg-general-50 p-4 rounded-lg mx-4 mb-8" onPress={handleSubmit}>
+          <Text className="text-white text-center text-base font-semibold">
+            Save Journal
+          </Text>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
