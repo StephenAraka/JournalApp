@@ -57,7 +57,7 @@ export default function Page() {
 
       <TouchableOpacity
         onPress={onSignInPress}
-        className="bg-pink-600 rounded-md py-3 mb-6"
+        className="bg-general-50 rounded-md py-3 mb-6"
       >
         <Text className="text-white text-center text-base font-semibold">Continue</Text>
       </TouchableOpacity>
@@ -65,7 +65,7 @@ export default function Page() {
       <View className="flex-row justify-center">
         <Text className="text-base text-gray-700">Don't have an account? </Text>
         <Link href="/sign-up">
-          <Text className="text-base text-pink-600 font-semibold">Sign up</Text>
+          <Text className="text-base text-general-50 font-semibold">Sign up</Text>
         </Link>
       </View>
     </View>

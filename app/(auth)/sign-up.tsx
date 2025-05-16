@@ -56,7 +56,7 @@ export default function SignUpScreen() {
         />
         <TouchableOpacity
           onPress={onVerifyPress}
-          className="bg-pink-600 rounded-md py-3"
+          className="bg-general-50 rounded-md py-3"
         >
           <Text className="text-white text-center text-base font-semibold">Verify</Text>
         </TouchableOpacity>
@@ -87,7 +87,7 @@ export default function SignUpScreen() {
 
       <TouchableOpacity
         onPress={onSignUpPress}
-        className="bg-pink-600 rounded-md py-3 mb-6"
+        className="bg-general-50 rounded-md py-3 mb-6"
       >
         <Text className="text-white text-center text-base font-semibold">Continue</Text>
       </TouchableOpacity>
@@ -95,7 +95,7 @@ export default function SignUpScreen() {
       <View className="flex-row justify-center">
         <Text className="text-base text-gray-700">Already have an account? </Text>
         <Link href="/sign-in">
-          <Text className="text-base text-pink-600 font-semibold">Sign in</Text>
+          <Text className="text-base text-general-50 font-semibold">Sign in</Text>
         </Link>
       </View>
     </View>
