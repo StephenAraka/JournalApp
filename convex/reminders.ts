@@ -14,7 +14,7 @@ export const sendJournalEmails = internalMutation({
     const senders = Array.from(new Set(allJournals.map(j => j.owner)));
 
     for (const email of senders) {
-      // Journals NOT authored by this user
+      // - Journals NOT authored by this user
       const otherJournals = allJournals.filter(j => j.owner !== email);
 
       if (otherJournals.length === 0) continue;
