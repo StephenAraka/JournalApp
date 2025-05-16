@@ -1,0 +1,30 @@
+[
+  {
+    "title": "A Beautiful Day",
+    "mood": "Happy",
+    "description": "Today I felt really great and full of energy. I went for a long walk and enjoyed the sunshine. I also met up with some friends for lunch, which was really nice. I love days like this!",
+    "owner": "stevenaraka@gmail.com",
+    "createdAt": "2025-05-15T10:00:00Z"
+  },
+  {
+    "title": "Feeling Blue",
+    "mood": "Sad",
+    "description": "It was a rough day. I felt pretty low emotionally  and struggled to get out of bed. I spent most of the day watching TV and eating junk food. I hope tomorrow is better. I need to take care of myself.",
+    "owner": "stevenaraka@gmail.com",
+    "createdAt": "2025-05-14T10:00:00Z"
+  },
+  {
+    "title": "Finding Calm",
+    "mood": "Calm",
+    "description": "I took some time to meditate and practice mindfulness today. It really helped me feel more centered and calm. I also did some yoga, which was a great way to release tension.",
+    "owner": "stevenaraka@gmail.com",
+    "createdAt": "2025-05-13T10:00:00Z"
+  },
+  {
+    "title": "Anxious Thoughts",
+    "mood": "Sad",
+    "description": "I had a lot of anxious thoughts today. I felt overwhelmed by everything going on in my life. I tried to talk to a friend about it, but it was hard to express how I was feeling.",
+    "owner": "stevenaraka@gmail.com",
+    "createdAt": "2025-05-12T10:00:00Z"
+  }
+]

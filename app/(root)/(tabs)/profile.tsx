@@ -1,14 +1,15 @@
 import ScreenTitleHeader from '@/components/ScreenTitleHeader';
 import { icons } from '@/constants';
-import { useClerk } from '@clerk/clerk-expo';
+import { useClerk, useUser } from '@clerk/clerk-expo';
 import * as Linking from 'expo-linking';
 import { useState } from 'react';
 import { Image, ScrollView, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Profile = () => {
+  const { user } = useUser()
   const [emailNotifications, setEmailNotifications] = useState(true);
-  const userEmail = 'user@example.com'; // TODO: Replace with actual user email
+  const userEmail = user?.emailAddresses[0].emailAddress || '';
 
   // Log Out using clerk's `signOut()` function
   const { signOut } = useClerk()
@@ -29,12 +30,15 @@ const Profile = () => {
         <ScreenTitleHeader showCloseButton={false} title="Profile" />
 
         {/* Profile Section */}
-        <View className="mb-6">
-          <Text className="text-sm text-gray-500 mb-2">Profile</Text>
-          <View className="bg-white py-4 px-4 border-b border-gray-100">
-            <Text className="text-base text-gray-800">Email: {userEmail}</Text>
+        {userEmail && (
+          <View className="mb-6">
+            <Text className="text-sm text-gray-500 mb-2">Profile</Text>
+            <View className="bg-white py-4 px-4 border-b flex-row justify-between border-gray-100">
+              <Text className="text-base text-gray-800">Email</Text>
+              <Text className="text-base text-general-50">{userEmail}</Text>
+            </View>
           </View>
-        </View>
+        )}
 
         {/* Email Notification Toggle */}
         <View className="mb-6">
@@ -51,17 +55,19 @@ const Profile = () => {
         </View>
 
         {/* Reset Password Link */}
-        <View className="mb-6">
-          <Text className="text-sm text-gray-500 mb-2">Security</Text>
-          <TouchableOpacity className="flex-row justify-between items-center bg-white py-4 px-4 border-b border-gray-100">
-            <Text className="text-base text-gray-800">Reset Password</Text>
-            <Image
-              source={icons.chevronLeft}
-              className="w-6 h-6 rotate-180"
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-        </View>
+        {userEmail && (
+          <View className="mb-6">
+            <Text className="text-sm text-gray-500 mb-2">Security</Text>
+            <TouchableOpacity className="flex-row justify-between items-center bg-white py-4 px-4 border-b border-gray-100">
+              <Text className="text-base text-gray-800">Reset Password</Text>
+              <Image
+                source={icons.chevronLeft}
+                className="w-6 h-6 rotate-180"
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </View>
+        )}
 
         {/* About Section */}
         <View className="mb-10">

@@ -1,6 +1,10 @@
 import MoodSelector from '@/components/MoodSelector';
 import ScreenTitleHeader from '@/components/ScreenTitleHeader';
-import { moods } from '@/constants';
+import { api } from '@/convex/_generated/api';
+import { getCoverImage } from '@/lib/utils/helpers';
+import { useUser } from '@clerk/clerk-expo';
+import { useMutation } from 'convex/react';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import {
   Image,
@@ -15,11 +19,13 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AddJournal = () => {
+  const { user } = useUser()
   const [mood, setMood] = useState('Happy');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [showTitleError, setShowTitleError] = useState(false);
   const [showDescriptionError, setShowDescriptionError] = useState(false);
+  const userEmail = user?.emailAddresses[0].emailAddress
 
   const today = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -27,24 +33,11 @@ const AddJournal = () => {
     day: 'numeric',
   });
 
-  const getCoverImage = (mood: string) => {
-    switch (mood) {
-      case 'Happy':
-        return moods[0];
-      case 'Sad':
-        return moods[1];
-      case 'Calm':
-        return moods[3];
-      case 'Anxious':
-        return moods[2];
-      default:
-        return moods[0];
-    }
-  };
-
   const MAXCHARS = 500;
 
-  const handleSubmit = () => {
+  const submitJournal = useMutation(api.journals.submit);
+
+  const handleSubmit = async () => {
     if (!title.trim()) {
       setShowTitleError(true);
       return;
@@ -54,8 +47,23 @@ const AddJournal = () => {
       return;
     }
 
-    // Save the journal entry
-    console.log('Journal Entry:', { mood, description });
+    // Save the journal entry to the database
+    try {
+      await submitJournal({
+        title,
+        mood,
+        description,
+        date: new Date().toISOString(),
+        owner: userEmail!,
+      });
+      router.push('/(root)/(tabs)/journals');
+      
+      setTitle('');
+      setDescription('');
+      setMood('Happy');
+    } catch (error) {
+      console.error("Failed to submit journal", error);
+    }
   };
 
   return (
@@ -66,13 +74,13 @@ const AddJournal = () => {
         keyboardVerticalOffset={100}
       >
         <ScrollView
-      className="flex-1"
-      contentContainerStyle={{ paddingBottom: 100 }}
-      keyboardShouldPersistTaps="handled"
-    >
+          className="flex-1"
+          contentContainerStyle={{ paddingBottom: 100 }}
+          keyboardShouldPersistTaps="handled"
+        >
           <ScreenTitleHeader title="Today's Journal" />
 
-          {/* Date */}
+          {/* // - Date */}
           <View className="flex-row items-center justify-center">
             <View className="rounded-md px-4 py-3 bg-secondary-200">
               <Text className="text-base text-gray-800 text-center">{today}</Text>
@@ -80,7 +88,7 @@ const AddJournal = () => {
           </View>
 
           <View className="px-4 pt-4">
-            {/* Mood Image */}
+            {/* // - Mood Image */}
             <View className="bg-gray-100 rounded-xl h-48 mb-6 overflow-hidden">
               <Image
                 source={getCoverImage(mood)}
@@ -89,7 +97,7 @@ const AddJournal = () => {
               />
             </View>
 
-            {/* Title */}
+            {/* // - Journal Title */}
             <View className='mb-4'>
               <Text className="text-sm font-semibold text-gray-700 mb-1">Title</Text>
               <TextInput
@@ -106,14 +114,14 @@ const AddJournal = () => {
               {showTitleError && <Text className="ml-2 text-sm text-red-500 mb-1">Please enter a title</Text>}
             </View>
 
-            {/* Mood Selector */}
+            {/* // -  Journal Mood Selector */}
             <MoodSelector
               label="How are you feeling today?"
               selectedValue={mood}
               onValueChange={(value) => setMood(value)}
             />
 
-            {/* Description */}
+            {/* // - Journal Description */}
             <Text className="text-sm font-semibold text-gray-700 mb-1 mt-4">Description</Text>
             <View className="relative">
               <TextInput
@@ -137,12 +145,11 @@ const AddJournal = () => {
           </View>
         </ScrollView>
 
-{/* Save Button */}
-      <TouchableOpacity className="bg-general-50 p-4 rounded-lg mx-4 mb-8" onPress={handleSubmit}>
-        <Text className="text-white text-center text-base font-semibold">
-          Save Journal
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity className="bg-general-50 p-4 rounded-lg mx-4 mb-8" onPress={handleSubmit}>
+          <Text className="text-white text-center text-base font-semibold">
+            Save Journal
+          </Text>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
