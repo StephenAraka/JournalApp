@@ -1,5 +1,7 @@
 import ScreenTitleHeader from '@/components/ScreenTitleHeader';
 import { icons } from '@/constants';
+import { useClerk } from '@clerk/clerk-expo';
+import * as Linking from 'expo-linking';
 import { useState } from 'react';
 import { Image, ScrollView, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,10 +10,16 @@ const Profile = () => {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const userEmail = 'user@example.com'; // TODO: Replace with actual user email
 
-  const logOutUser = () => {
-    // TODO: Implement logout functionality
-    console.log('User logged out');
-  };
+  // Log Out using clerk's `signOut()` function
+  const { signOut } = useClerk()
+  const logOutUser = async () => {
+    try {
+      await signOut()
+      Linking.openURL(Linking.createURL('/(auth)/welcome'))
+    } catch (err) {
+      console.error(JSON.stringify(err, null, 2))
+    }
+  }
 
   return (
     <SafeAreaView className="flex-1 bg-white">

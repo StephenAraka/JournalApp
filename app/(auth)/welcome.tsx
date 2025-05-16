@@ -1,62 +1,65 @@
 import CustomButton from "@/components/CustomButton";
-import { onboarding } from "@/constants";
+import { moods } from "@/constants";
+import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
-import { useRef, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { ImageBackground, Linking, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Swiper from "react-native-swiper";
 
-const Onboarding = () => {
-  const swiperRef = useRef<Swiper>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const isLastSlide = activeIndex === onboarding.length - 1;
+const Welcome = () => {
+  const openLink = (url: string) => {
+    Linking.openURL(url);
+  };
 
   return (
-    <SafeAreaView className="flex-1 h-full items-center justify-between bg-white">
-      <TouchableOpacity
-        onPress={() => router.replace("/(auth)/sign-up")}
-        className="w-full flex justify-end items-end p-5"
+    <ImageBackground
+      source={moods[0]}
+      resizeMode="cover"
+      className="flex-1"
+    >
+      {/* Gradient Overlay */}
+      <LinearGradient
+        colors={[
+          "rgba(0,0,0,0.1)",
+          "rgba(0,0,0,0.5)",
+          "rgba(0,0,0,0.9)",
+          "rgba(0,0,0,1)",
+        ]}
+        style={{ flex: 1 }}
+        start={{ x: 0.5, y: 0 }}
+        end={{ x: 0.5, y: 1 }}
       >
-        <Text className="text-black text-md font-JakartaBold">Skip</Text>
-      </TouchableOpacity>
-
-      <Swiper
-        ref={swiperRef}
-        loop={false}
-        dot={<View className="w-[32px] h-[4px] mx-1 bg-[#E2E8f0]" />}
-        activeDot={<View className="w-[32px] h-[4px] mx-1 bg-[#0286FF]" />}
-        onIndexChanged={(index) => setActiveIndex(index)}
-      >
-        {onboarding.map((item) => (
-          <View key={item.id} className="flex items-center justify-center">
-            <Image
-              source={item.image}
-              className="w-full h-[300px]"
-              resizeMode="contain"
-            />
-            <View className="flex flex-row items-center justify-center w-full mt-10">
-              <Text className="text-black text-3xl font-bold mx-10 text-center">
-                {item.title}
+        <SafeAreaView className="flex-1 items-center justify-end p-8 gap-12">
+          <View className="flex w-full justify-center items-center">
+            <View className="flex gap-2">
+              <Text className="text-3xl text-center font-bold capitalize text-white">
+                Welcome to NashPad
+              </Text>
+              <Text className="text text-center text-white">
+                Your personal mood tracker and journal. 
+                Track your moods, reflect on your day, and gain insights into your emotional well-being.
               </Text>
             </View>
-            <Text className="text-lg font-JakartaSemiBold mx-10 mt-3 text-center text-[#858585]">
-              {item.description}
-            </Text>
           </View>
-        ))}
-      </Swiper>
 
-      <CustomButton
-        title={isLastSlide ? "Get Started" : "Next"}
-        onPress={() =>
-          isLastSlide
-            ? router.replace("/(auth)/sign-up")
-            : swiperRef.current?.scrollBy(1)
-        }
-        className="w-11/12 mt-10"
-      />
-    </SafeAreaView>
+          {/* SIGN IN SECTION */}
+          <View className="flex flex-row justify-between gap-6 w-full">
+            <CustomButton
+              title="Sign up"
+              onPress={() => router.push("/(auth)/sign-up")}
+              className="bg-white w-1/2"
+              textVariant="primary"
+            />
+            <CustomButton
+              title="Log in"
+              onPress={() => router.push("/(auth)/sign-in")}
+              className="bg-white w-1/2"
+              textVariant="primary"
+            />
+          </View>
+        </SafeAreaView>
+      </LinearGradient>
+    </ImageBackground>
   );
 };
 
-export default Onboarding;
+export default Welcome;
