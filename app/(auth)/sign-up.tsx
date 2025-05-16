@@ -47,7 +47,7 @@ export default function SignUpScreen() {
   if (pendingVerification) {
     return (
       <View className="flex-1 bg-white px-6 pt-20">
-        <Text className="text-2xl font-bold mb-4 text-center">Verify your email</Text>
+        <ScreenTitleHeader title='Verify Your Email' />
         <TextInput
           value={code}
           placeholder="Verification code"
