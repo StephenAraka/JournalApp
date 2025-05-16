@@ -58,6 +58,7 @@ const AddJournal = () => {
     }
 
     // Save the journal entry
+    // TODO - Submit to the backend
     console.log('Journal Entry:', {
       title,
       mood,
