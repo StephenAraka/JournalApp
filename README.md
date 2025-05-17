@@ -4,6 +4,18 @@ Nashpad Journal is a mobile journaling app built with **React Native and Expo**.
 
 ---
 
+## App Branding and UI
+
+
+| Welcome | Sign Up | Home |
+|-|-|-|
+| <img src="./assets/screenshots/01.png"  > | <img src="./assets/screenshots/02.png"  > | <img src="./assets/screenshots/03.png"  > |
+
+| Add Journal | Journals Empty | View Journals | Settings |
+|-|-|-|-|
+| <img src="./assets/screenshots/04.png"  > | <img src="./assets/screenshots/06.png"  > | <img src="./assets/screenshots/07.png"  > | <img src="./assets/screenshots/05.png"  > |
+---
+
 ## ⚙️ Architecture Overview
 
 - **Frontend:** [React Native](https://reactnative.dev/) (via [Expo](https://expo.dev/))  
@@ -54,4 +66,15 @@ For local development, ensure you're running convex dev if needed.
 Download and try out the app on Android:
 
 👉 [Download APK](https://drive.google.com/file/d/1T3n9yXwWs4tOL-kL6jhZliVnAaJsqdXt/view?usp=drive_link)
+
+## Emails
+The app is able to send emails using Resend. You can test this feature by signing up and creating a journal entry. The app will send you an email at noon with other users journal entries.
+<img src="./assets/screenshots/emails.png"  >
+
+## AI Assistant (Bonus Feature 😉)
+The AI Assistant feature allows users to interact with their journal entries in a conversational manner. It uses Google's Gemini API to generate responses based on the user's journal.
+
+| AI Assistant | AI Assistant Response |
+|-|-|
+| <img src="./assets/screenshots/08.png"  > | <img src="./assets/screenshots/09.png"  > |
 
