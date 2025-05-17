@@ -14,6 +14,8 @@ Nashpad Journal is a mobile journaling app built with **React Native and Expo**.
   - Scheduled cron jobs
 - **Email Notifications:** [Resend](https://resend.com/) for transactional emails
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) via `nativewind`
+- **AI Feature:** Bonus **AI Assistant** allows you to reflect on your journal entries through a natural, conversational interface.
+
 
 Convex was chosen for its tight integration with React, ease of managing server functions and database logic in a type-safe way, and support for real-time syncing and scheduled tasks — making it an ideal fit for a dynamic journaling app.
 
@@ -46,3 +48,10 @@ For local development, ensure you're running convex dev if needed.
 
 #### 4. 4. Start the App
 `npx expo start`
+
+## 📱 Demo
+
+Download and try out the app on Android:
+
+👉 [Download APK](https://drive.google.com/file/d/1T3n9yXwWs4tOL-kL6jhZliVnAaJsqdXt/view?usp=drive_link)
+
