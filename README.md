@@ -18,6 +18,9 @@ Nashpad Journal is a mobile journaling app built with **React Native and Expo**.
 
 ## ⚙️ Architecture Overview
 
+#### Architecture Diagram
+![Architecture Diagram](./assets/screenshots/architecture.png)
+
 - **Frontend:** [React Native](https://reactnative.dev/) (via [Expo](https://expo.dev/))  
 - **Authentication:** [Clerk](https://clerk.dev/) for secure user management  
 - **Backend:** [Convex](https://convex.dev/) for:
@@ -29,7 +32,7 @@ Nashpad Journal is a mobile journaling app built with **React Native and Expo**.
 - **AI Feature:** Bonus **AI Assistant** allows you to reflect on your journal entries through a natural, conversational interface.
 
 
-Convex was chosen for its tight integration with React, ease of managing server functions and database logic in a type-safe way, and support for real-time syncing and scheduled tasks — making it an ideal fit for a dynamic journaling app.
+Convex was chosen for its tight integration with React, ease of managing server functions and database logic in a type-safe way, and support for real-time syncing and scheduled tasks, making it an ideal fit for a dynamic journaling app.
 
 ---
 
