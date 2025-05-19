@@ -26,6 +26,7 @@ export default function SignUpScreen() {
       await signUp.prepareEmailAddressVerification({ strategy: 'email_code' })
       setPendingVerification(true)
     } catch (err) {
+      setLoading(false)
       setShowError(true)
       setErrMsg(err?.errors[0]?.longMessage || 'Invalid email or password')
     }
@@ -34,6 +35,7 @@ export default function SignUpScreen() {
   const onVerifyPress = async () => {
     if (!isLoaded) return
 
+    setLoading(true)
     try {
       const signUpAttempt = await signUp.attemptEmailAddressVerification({ code })
       if (signUpAttempt.status === 'complete') {
@@ -41,6 +43,7 @@ export default function SignUpScreen() {
         setLoading(false)
         router.replace('/')
       } else {
+        setLoading(false)
         console.error(JSON.stringify(signUpAttempt, null, 2))
       }
     } catch (err) {
