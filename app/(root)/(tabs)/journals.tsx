@@ -6,28 +6,29 @@ import { Journal } from '@/types/type';
 import { useUser } from '@clerk/clerk-expo';
 import { useQuery } from 'convex/react';
 import { useRouter } from 'expo-router';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Journals = () => {
-  const { user } = useUser()
+  const { user } = useUser();
   const userEmail = user?.emailAddresses[0].emailAddress || '';
 
   const router = useRouter();
   const journals = useQuery(api.journals.get, {
     owner: userEmail,
-  }) || [];
+  });
 
+  const isLoading = journals === undefined;
 
   const renderItem = ({ item }: { item: Journal }) => (
     <TouchableOpacity
       className="flex-row items-center bg-white rounded-lg shadow-sm p-4 mb-3 mx-4"
-      onPress={() => router.push(
-        {
+      onPress={() =>
+        router.push({
           pathname: "/journal-detail",
           params: { ...item },
-        }
-      )}
+        })
+      }
     >
       <Image source={getCoverImage(item.mood)} className="w-16 h-16 rounded-md mr-4" resizeMode="cover" />
       <View className="flex-1">
@@ -40,7 +41,12 @@ const Journals = () => {
   return (
     <SafeAreaView className="flex-1 bg-gray-50 pt-4">
       <ScreenTitleHeader showBackButton={false} title="My Journals" />
-      {journals.length === 0 ? (
+
+      {isLoading ? (
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator size="large" color="#999" />
+        </View>
+      ) : journals.length === 0 ? (
         <View className="flex-1 items-center justify-center">
           <Image
             source={images.noResult}
@@ -50,13 +56,13 @@ const Journals = () => {
           <Text className="text-gray-500 text-lg">No journals found.</Text>
         </View>
       ) : (
-      <FlatList
-        data={journals}
-        keyExtractor={(item) => item._id}
-        renderItem={renderItem}
-        contentContainerStyle={{ paddingBottom: 16 }}
-      />
-    )}
+        <FlatList
+          data={journals}
+          keyExtractor={(item) => item._id}
+          renderItem={renderItem}
+          contentContainerStyle={{ paddingBottom: 16 }}
+        />
+      )}
     </SafeAreaView>
   );
 };
