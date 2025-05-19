@@ -87,7 +87,7 @@ const MoodJournalBot = ({
         </View>
       )}
 
-      <TouchableOpacity onPress={() => setShowTooltip(!showTooltip)} className='' >
+      <TouchableOpacity onPress={() => setShowTooltip(!showTooltip)} className='absolute w-20 h-20 bottom-12 right-6' >
         <LottieView
           loop
           source={animations.star}
@@ -96,9 +96,6 @@ const MoodJournalBot = ({
             height: 100,
             marginTop: 20,
             width: 100,
-            position: 'absolute',
-            bottom: 0,
-            right: 0,
           }}
         />
       </TouchableOpacity>
