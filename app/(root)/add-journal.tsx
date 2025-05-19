@@ -59,7 +59,7 @@ const AddJournal = () => {
         owner: userEmail!,
       });
       router.push('/(root)/(tabs)/journals');
-      
+
       setLoading(false);
       setTitle('');
       setDescription('');
@@ -71,14 +71,13 @@ const AddJournal = () => {
   };
 
   return (
-    <SafeAreaView className="flex h-full bg-white">
+    <SafeAreaView className="flex-1 bg-white">
       <KeyboardAvoidingView
-        className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={100}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
+        style={{ flex: 1 }}
       >
         <ScrollView
-          className="flex-1"
           contentContainerStyle={{ paddingBottom: 100 }}
           keyboardShouldPersistTaps="handled"
         >
@@ -151,15 +150,15 @@ const AddJournal = () => {
           </View>
         </ScrollView>
 
-        <CustomButton
-        title='Save Journal'
-        onPress={handleSubmit}
-        className='py-3 rounded-md mb-10 mx-4'
-        loading={loading}
-      />
-
-
       </KeyboardAvoidingView>
+      <View className="absolute bottom-10 left-0 right-0 bg-white shadow-md">
+        <CustomButton
+          title='Save Journal'
+          onPress={handleSubmit}
+          className='py-3 rounded-md mx-4'
+          loading={loading}
+        />
+      </View>
     </SafeAreaView>
   );
 };
