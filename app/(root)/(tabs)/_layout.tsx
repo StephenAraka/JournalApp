@@ -16,7 +16,7 @@ const Layout = () => {
           // paddingBottom: 0,
           overflow: "hidden",
           marginHorizontal: 20,
-          marginBottom: 20,
+          marginBottom: 32,
           height: 78,
           display: "flex",
           justifyContent: "space-between",

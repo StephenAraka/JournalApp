@@ -3,6 +3,7 @@ import { icons, moods } from '@/constants';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
   const router = useRouter();
@@ -12,7 +13,8 @@ const Home = () => {
 };
 
   return (
-    <View className="w-full h-full">
+    <SafeAreaView className="h-full w-full bg-yellow-100">
+
       <ImageBackground 
         source={moods[0]} 
         className="w-full h-full rounded-lg overflow-hidden"
@@ -31,7 +33,7 @@ const Home = () => {
       <TouchableOpacity onPress={goToAddJournal} className="absolute bottom-[114px] right-[40%] bg-general-50 p-4 rounded-full">
         <TabIcon source={icons.plus} focused={true} />
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
