@@ -1,6 +1,7 @@
 import TabIcon from "@/components/TabIcon";
 import { icons } from "@/constants";
 import { Tabs } from "expo-router";
+import { Platform } from "react-native";
 
 const Layout = () => {
   return (
@@ -16,10 +17,11 @@ const Layout = () => {
           // paddingBottom: 0,
           overflow: "hidden",
           marginHorizontal: 20,
-          marginBottom: 32,
+          marginBottom: 48,
           height: 78,
           display: "flex",
           justifyContent: "space-between",
+          paddingTop: Platform.OS === "ios" ? 0 : 24,
           alignItems: "center",
           flexDirection: "row",
           position: "absolute",

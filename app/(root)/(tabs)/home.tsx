@@ -30,7 +30,7 @@ const Home = () => {
           </Text>
         </View>
       </ImageBackground>
-      <TouchableOpacity onPress={goToAddJournal} className="absolute bottom-[114px] right-[40%] bg-general-50 p-4 rounded-full">
+      <TouchableOpacity onPress={goToAddJournal} className="absolute bottom-[136px] right-[40%] bg-general-50 p-4 rounded-full">
         <TabIcon source={icons.plus} focused={true} />
       </TouchableOpacity>
     </SafeAreaView>
