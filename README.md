@@ -68,7 +68,7 @@ For local development, ensure you're running convex dev if needed.
 
 Download and try out the app on Android:
 
-👉 [Download APK](https://drive.google.com/file/d/1EyErrxTNQTGPxap8bNnPVYy7DHlvGuHX/view?usp=drive_link)
+👉 [Download APK](https://www.upload-apk.com/eNWkStjnvpSbjRx)
 
 ## Emails
 The app is able to send emails using Resend. You can test this feature by signing up and creating a journal entry. The app will send you an email at noon with other users journal entries.
