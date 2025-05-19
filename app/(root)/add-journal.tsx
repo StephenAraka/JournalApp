@@ -110,6 +110,7 @@ const AddJournal = () => {
                 }}
                 maxLength={50}
                 onFocus={() => setShowTitleError(false)}
+                placeholderTextColor='#4D4D4D'
               />
               {showTitleError && <Text className="ml-2 text-sm text-red-500 mb-1">Please enter a title</Text>}
             </View>
@@ -136,6 +137,7 @@ const AddJournal = () => {
                 }}
                 maxLength={MAXCHARS}
                 onFocus={() => setShowDescriptionError(false)}
+                placeholderTextColor='#4D4D4D'
               />
               <Text className="absolute bottom-2 right-3 text-xs text-gray-400">
                 {MAXCHARS - description.length} characters left

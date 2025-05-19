@@ -53,6 +53,7 @@ export default function SignUpScreen() {
           placeholder="Verification code"
           onChangeText={setCode}
           className="border border-gray-300 rounded-md px-4 py-3 mb-4 text-base"
+          placeholderTextColor='#4D4D4D'
         />
         <TouchableOpacity
           onPress={onVerifyPress}
@@ -74,6 +75,7 @@ export default function SignUpScreen() {
         placeholder="Enter email"
         onChangeText={setEmailAddress}
         className="border border-gray-300 rounded-md px-4 py-3 mb-4 text-base"
+        placeholderTextColor='#4D4D4D'
       />
       <TextInput
         value={password}
@@ -81,6 +83,7 @@ export default function SignUpScreen() {
         secureTextEntry
         onChangeText={setPassword}
         className="border border-gray-300 rounded-md px-4 py-3 mb-6 text-base"
+        placeholderTextColor='#4D4D4D'
       />
 
       {showError && <Text className="text-sm text-red-500 mb-1">{errMsg}</Text>}
