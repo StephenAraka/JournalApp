@@ -1,3 +1,4 @@
+import CustomButton from '@/components/CustomButton'
 import ScreenTitleHeader from '@/components/ScreenTitleHeader'
 import { useSignUp } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
@@ -14,10 +15,12 @@ export default function SignUpScreen() {
   const [code, setCode] = React.useState('')
   const [showError, setShowError] = useState(false)
   const [errMsg, setErrMsg] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const onSignUpPress = async () => {
     if (!isLoaded) return
 
+    setLoading(true)
     try {
       await signUp.create({ emailAddress, password })
       await signUp.prepareEmailAddressVerification({ strategy: 'email_code' })
@@ -35,11 +38,13 @@ export default function SignUpScreen() {
       const signUpAttempt = await signUp.attemptEmailAddressVerification({ code })
       if (signUpAttempt.status === 'complete') {
         await setActive({ session: signUpAttempt.createdSessionId })
+        setLoading(false)
         router.replace('/')
       } else {
         console.error(JSON.stringify(signUpAttempt, null, 2))
       }
     } catch (err) {
+      setLoading(false)
       console.error(JSON.stringify(err, null, 2))
     }
   }
@@ -87,13 +92,12 @@ export default function SignUpScreen() {
       />
 
       {showError && <Text className="text-sm text-red-500 mb-1">{errMsg}</Text>}
-
-      <TouchableOpacity
+      <CustomButton
+        title='Continue'
         onPress={onSignUpPress}
-        className="bg-general-50 rounded-md py-3 mb-6"
-      >
-        <Text className="text-white text-center text-base font-semibold">Continue</Text>
-      </TouchableOpacity>
+        className='py-3 rounded-md mb-10'
+        loading={loading}
+      />
 
       <View className="flex-row justify-center">
         <Text className="text-base text-gray-700">Already have an account? </Text>

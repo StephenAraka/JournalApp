@@ -1,5 +1,5 @@
 import { ButtonProps } from "@/types/type";
-import { Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 
 const getBgVariantStyle = (variant: ButtonProps["bgVariant"]) => {
   switch (variant) {
@@ -16,7 +16,7 @@ const getBgVariantStyle = (variant: ButtonProps["bgVariant"]) => {
       return "bg-transparent border border-neutral-300 border-[0.5px]";
 
     default:
-      return "bg-[#0286FF]";
+      return "bg-general-50";
   }
 };
 
@@ -47,6 +47,7 @@ const CustomButton = ({
   IconLeft,
   IconRight,
   className,
+  loading = false,
   ...props
 }: ButtonProps) => {
   return (
@@ -55,10 +56,18 @@ const CustomButton = ({
       className={`rounded-full p-3 flex flex-row justify-center items-center shadow-md shadow-neutral-400/70 ${getBgVariantStyle(bgVariant)} ${className}`}
       {...props}
     >
-      {IconLeft && <IconLeft />}
-      <Text className={`text-lg font-bold ${getTextVariantStyle(textVariant)}`}>
-        {title}
-      </Text>
+      {(IconLeft && !loading) && <IconLeft />}
+      {!loading ? (
+        <Text className={`text-lg font-bold ${getTextVariantStyle(textVariant)}`}>
+          {title}
+        </Text>
+      ) : (
+        <ActivityIndicator
+          size="small"
+          color="white"
+          className="mr-2"
+        />
+      )}
       {IconRight && <IconRight />}
     </TouchableOpacity>
   );

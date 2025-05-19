@@ -1,3 +1,4 @@
+import CustomButton from '@/components/CustomButton';
 import MoodSelector from '@/components/MoodSelector';
 import ScreenTitleHeader from '@/components/ScreenTitleHeader';
 import { api } from '@/convex/_generated/api';
@@ -13,7 +14,6 @@ import {
   ScrollView,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -26,6 +26,7 @@ const AddJournal = () => {
   const [showTitleError, setShowTitleError] = useState(false);
   const [showDescriptionError, setShowDescriptionError] = useState(false);
   const userEmail = user?.emailAddresses[0].emailAddress
+  const [loading, setLoading] = useState(false)
 
   const today = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -47,6 +48,7 @@ const AddJournal = () => {
       return;
     }
 
+    setLoading(true);
     // - Save the journal entry to the database
     try {
       await submitJournal({
@@ -58,10 +60,12 @@ const AddJournal = () => {
       });
       router.push('/(root)/(tabs)/journals');
       
+      setLoading(false);
       setTitle('');
       setDescription('');
       setMood('Happy');
     } catch (error) {
+      setLoading(false);
       console.error("Failed to submit journal", error);
     }
   };
@@ -147,11 +151,14 @@ const AddJournal = () => {
           </View>
         </ScrollView>
 
-        <TouchableOpacity className="bg-general-50 p-4 rounded-lg mx-4 mb-8" onPress={handleSubmit}>
-          <Text className="text-white text-center text-base font-semibold">
-            Save Journal
-          </Text>
-        </TouchableOpacity>
+        <CustomButton
+        title='Save Journal'
+        onPress={handleSubmit}
+        className='py-3 rounded-md mb-10 mx-4'
+        loading={loading}
+      />
+
+
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

@@ -1,14 +1,16 @@
+import CustomButton from '@/components/CustomButton'
 import ScreenTitleHeader from '@/components/ScreenTitleHeader'
 import { useSignIn } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
 import React, { useState } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, TextInput, View } from 'react-native'
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn()
   const router = useRouter()
   const [showError, setShowError] = useState(false)
   const [errMsg, setErrMsg] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const [emailAddress, setEmailAddress] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -16,6 +18,7 @@ export default function Page() {
   const onSignInPress = async () => {
     if (!isLoaded) return
 
+    setLoading(true)
     try {
       const signInAttempt = await signIn.create({
         identifier: emailAddress,
@@ -24,11 +27,13 @@ export default function Page() {
 
       if (signInAttempt.status === 'complete') {
         await setActive({ session: signInAttempt.createdSessionId })
+        setLoading(false)
         router.replace('/(root)/(tabs)/home')
       } else {
         // console.error(JSON.stringify(signInAttempt, null, 2))
       }
     } catch (err) {
+      setLoading(false)
       setShowError(true)
       setErrMsg(err?.errors[0]?.longMessage || 'Invalid email or password')
     }
@@ -57,12 +62,12 @@ export default function Page() {
 
       {showError && <Text className="text-sm text-red-500 mb-1">{errMsg}</Text>}
 
-      <TouchableOpacity
+      <CustomButton
+        title='Sign In'
         onPress={onSignInPress}
-        className="bg-general-50 rounded-md py-3 mb-6"
-      >
-        <Text className="text-white text-center text-base font-semibold">Continue</Text>
-      </TouchableOpacity>
+        className='py-3 rounded-md mb-10'
+        loading={loading}
+      />
 
       <View className="flex-row justify-center">
         <Text className="text-base text-gray-700">Don't have an account? </Text>

@@ -1,3 +1,4 @@
+import CustomButton from '@/components/CustomButton';
 import ScreenTitleHeader from '@/components/ScreenTitleHeader';
 import { icons } from '@/constants';
 import { useClerk, useUser } from '@clerk/clerk-expo';
@@ -80,9 +81,12 @@ const Profile = () => {
         </View>
 
         {/*//- Logout Button */}
-        <TouchableOpacity onPress={logOutUser} className="bg-general-50 py-3 rounded-md mb-10 mx-4">
-          <Text className="text-center text-white font-semibold text-base">Logout</Text>
-        </TouchableOpacity>
+        <CustomButton
+          title='Logout'
+          onPress={logOutUser}
+          className='py-3 rounded-md mb-10 mx-4'
+        />
+
 
       </ScrollView>
     </SafeAreaView>
